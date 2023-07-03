@@ -104,3 +104,538 @@
 body {
   background-color: #00040F;
 }
+
+/* DASHBOARD */
+
+/* Estilos para el componente Section */
+.section-dashboard {
+  margin-left: 5vw;
+  margin-right: 14px;
+  padding: 2rem;
+  height: 60rem;
+  background-color: #F5F5FD;
+}
+
+/* Estilos para la clase grid */
+.grid {
+  margin-top: 0.5rem;
+  z-index: 2;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Estilos para el componente Nav */
+nav {
+  display: flex;
+  justify-content: space-between;
+  color: black;
+}
+
+/* Estilos para la clase title */
+.title h5 {
+  color: grey;
+}
+
+/* Estilos para la clase search */
+.search {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 8rem 1rem 1rem;
+  border-radius: 1.5rem;
+}
+
+/* Estilos para los elementos SVG dentro de la clase search */
+.search svg {
+  color: grey;
+}
+
+/* Estilos para el elemento input dentro de la clase search */
+.search input {
+  background-color: transparent;
+  border: none;
+  color: grey;
+}
+
+/* Estilos para el elemento input en estado de enfoque */
+.search input:focus {
+  outline: none;
+}
+
+/* Estilos para el marcador de posición del elemento input */
+.search input::placeholder {
+  color: grey;
+}
+
+.sales {
+  color: black;
+  width: 100%;
+}
+
+.sales__details {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.sales__details div {
+  display: flex;
+  gap: 1rem;
+}
+
+.sales__details h5 {
+  color: gray;
+}
+
+.sales__graph {
+  height: 10rem;
+  width: 100%;
+}
+
+.recharts-default-tooltip {
+  background-color: black !important;
+  border-color: black !important;
+  color: white !important;
+}
+
+/*estilos de history */
+.orders {
+  margin-top: 4rem;
+  color: black;
+  width: 100%;
+}
+
+.orders__details {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 1rem;
+}
+
+.orders__details div {
+  display: flex;
+  gap: 1rem;
+  color: grey;
+}
+
+.orders__table {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+  color: grey;
+}
+
+.orders__table table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.orders__table td {
+  text-align: center;
+  padding: 5px;
+  justify-content: space-evenly;
+}
+
+.orders__table td img {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 3rem;
+}
+
+/* estilos de activity */
+.activity {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.activity .title {
+  margin-left: 15px;
+}
+
+.activity .title h4 {
+  font-weight: bold;
+}
+
+.activity .title h6 {
+  color: grey;
+}
+
+.activity .analytic {
+  padding: 0.3rem 0.8rem 0.3rem 1.2rem;
+  color: black;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
+  transition: 0.5s ease-in-out;
+}
+
+.activity .analytic:hover {
+  background-color: #F5F5FD;
+  color: black;
+}
+
+.activity .analytic:hover svg {
+  color: black;
+}
+
+.activity .analytic .design {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.activity .analytic .logo {
+  background-color: white;
+  border-radius: 1rem;
+  border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.activity .analytic .logo svg {
+  font-size: 1.5rem;
+}
+
+.activity .analytic .content .color {
+  color: grey;
+}
+
+.activity .analytic .money h5 {
+  float: right;
+  margin-top: -30px;
+}
+
+/* estilos de Analytic */
+.analytic-section {
+  display: flex;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: space-between;
+  margin: 0 60px;
+}
+
+.analytic {
+  justify-content: space-between;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 1rem;
+  color: black;
+  background-color: white;
+  justify-content: space-evenly;
+  align-items: center;
+  transition: 0.5s ease-in-out;
+  width: 170px;
+}
+
+.analytic .design {
+  display: flex;
+  align-items: center;
+}
+
+.analytic .design .logo {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.analytic .design .logo svg {
+  font-size: 2rem;
+}
+
+.analytic .design .action {
+  margin-left: 80px;
+}
+
+.analytic .design .action svg {
+  font-size: 1.5rem;
+}
+
+.analytic .transfer {
+  margin-top: 20px;
+  color: grey;
+}
+
+.analytic .money {
+  margin-top: 20px;
+}
+
+/* estilos de Card */
+.card-section .shopping {
+  padding: 0.8rem 0.8rem 0.8rem 0.8rem;
+  border-radius: 1rem;
+  color: black;
+  background-color: #22202B;
+  align-items: center;
+  gap: 0.5rem;
+  transition: 0.5s ease-in-out;
+}
+
+.card-section .shopping:hover {
+  background-color: blue;
+  color: black;
+}
+
+.card-section .shopping .design {
+  display: flex;
+}
+
+.card-section .shopping .design svg {
+  font-size: 2rem;
+  color: white;
+}
+
+.card-section .shopping .number {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 10px;
+}
+
+.card-section .shopping .number h6 {
+  color: white;
+  font-size: 1rem;
+}
+
+.card-section .shopping .image {
+  display: flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  margin-left: 12rem;
+}
+
+.card-section .shopping .name {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card-section .shopping .name h6 {
+  color: grey;
+  font-size: 0.6rem;
+}
+
+.card-section .shopping .profile {
+  display: flex;
+  align-items: left;
+  gap: 5rem;
+  justify-content: space-evenly;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.card-section .shopping .profile span,
+.card-section .shopping .profile h6 {
+  color: white;
+}
+/* estilos de Notification */
+
+.notification-nav {
+  display: flex;
+  justify-content: space-between;
+  justify-content: right;
+}
+
+.notification-nav .notification {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.notification-nav .notification .font_icon {
+  font-size: 1.5rem;
+}
+
+.notification-nav .notification svg {
+  color: grey;
+}
+
+.notification-nav .notification .image {
+  display: flex;
+  gap: 1rem;
+}
+
+.notification-nav .notification .image img {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 3rem;
+}
+/* estilo de payment */
+.section-payment {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.section .title {
+  margin-left: 15px;
+}
+
+.section .title h4 {
+  font-weight: bold;
+}
+
+.section .title h6 {
+  color: grey;
+}
+
+.section .analytic {
+  padding: 0.3rem 0.8rem 0.3rem 1.2rem;
+  color: black;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
+  transition: 0.5s ease-in-out;
+  float: both;
+}
+
+.section .analytic:hover {
+  background-color: #F5F5FD;
+  color: black;
+}
+
+.section .analytic svg {
+  color: black;
+}
+
+.section .analytic .design {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section .analytic .logo {
+  background-color: white;
+  border-radius: 1rem;
+  border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.section .analytic .logo svg {
+  font-size: 1.5rem;
+}
+
+.section .analytic .color {
+  color: grey;
+}
+
+.section .analytic .money h5 {
+  float: right;
+  margin-top: -30px;
+}
+/* estilos para Sidebar */
+.sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  background-color: #ECECF6;
+  height: 100vh;
+  width: 20vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0.5rem;
+  gap: 2rem;
+}
+
+.grid-sidebar {
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* estilo del sidebar general */
+/* sidebar.css */
+
+.section-sidebar {
+  position: fixed;
+  left: 0;
+  background-color: #ececf6;
+  height: 100vh;
+  width: 6vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 0;
+  gap: 2rem;
+}
+
+.Brand {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.3rem 0;
+}
+
+.Brand .color1 {
+  color: red;
+}
+
+.Brand .color2 {
+  color: yellow;
+}
+
+.Brand .color3 {
+  color: green;
+}
+
+.Brand svg {
+  margin: 0 2px;
+  font-size: 0.8rem;
+}
+
+.Links ul {
+  margin-bottom: 3rem;
+}
+
+.Links .active {
+  border-right: 0.2rem solid black;
+}
+
+.Links li {
+  display: flex;
+  justify-content: center;
+  border-right: 0.2rem solid transparent;
+  margin: 1rem 0;
+  list-style-type: none;
+}
+
+.Links li a {
+  text-decoration: none;
+  color: grey;
+  font-size: 1.6rem;
+  gap: 0 0.4rem;
+}
+
+.Links li a.noti {
+  display: flex;
+  margin-left: 21px;
+}
+
+.Links li a.noti span {
+  background-color: red;
+  font-size: 0.5rem;
+  border-radius: 50%;
+  padding: 2px 5px 2px 5px;
+  color: white;
+  margin-bottom: 19px;
+  margin-top: -10px;
+}
+
+.Links li:hover a {
+  color: black;
+}
+
+.Links .active a {
+  color: black;
+}
+
+/*  */

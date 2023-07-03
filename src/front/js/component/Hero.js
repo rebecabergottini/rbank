@@ -1,6 +1,6 @@
 import React from "react";
-import GetStarted from "./GetStarted";
-import Button from 'react-bootstrap/Button';
+import GetStarted from "./GetStarted.js";
+import Button from "react-bootstrap/Button";
 
 const Hero = () => {
   return (
@@ -8,27 +8,84 @@ const Hero = () => {
       <div className="flex-1 d-flex flex-column xl-px-0 sm-px-16 px-6">
         <div className="d-flex flex-row align-items-center py-2 px-4 bg-discount-gradient rounded-3 mb-2">
           {/* <img src="src/front/assets/Discount.png" alt="discount" className="me-2" style={{ width: '32px', height: '32px' }} /> */}
-          <p className="font-poppins font-normal text-white-50 text-sm mb-0" style={{ color: '#FFF', fontSize: '18px', fontFamily: 'Poppins', lineHeight: '150%' }}>
-            <span className="text-white">20%</span> Discount For <span className="text-white">1 Month</span> Account
+          <p
+            className="font-poppins font-normal text-white-50 text-sm mb-0"
+            style={{
+              color: "#FFF",
+              fontSize: "18px",
+              fontFamily: "Poppins",
+              lineHeight: "150%",
+            }}
+          >
+            <span className="text-white">20%</span> Discount For{" "}
+            <span className="text-white">1 Month</span> Account
           </p>
         </div>
 
-        <div className="d-flex flex-row justify-content-between align-items-center w-100" style={{ display: 'flex', width: '670px', flexDirection: 'column', flexShrink: 0 }}>
-          <h1 className="flex-1 font-poppins font-weight-bold text-white mb-0" style={{ fontSize: '72px', lineHeight: '140%', letterSpacing: '0.72px' }}>
+        <div
+          className="d-flex flex-column"
+          style={{
+            display: "flex",
+            width: "670px",
+            flexDirection: "column",
+            flexShrink: 0,
+          }}
+        >
+          <h1
+            className="font-poppins font-weight-bold text-white mb-0"
+            style={{
+              fontSize: "72px",
+              lineHeight: "140%",
+              letterSpacing: "0.72px",
+            }}
+          >
             The Next <br className="d-sm-none" />
             <span className="text-gradient">Generation</span>
             <br />
           </h1>
-          <h1 className="flex-1 font-poppins font-weight-bold text-white mb-0" style={{ fontSize: '72px', lineHeight: '140%', letterSpacing: '0.72px' }}>Payment Method.</h1>
-          
+          <h1
+            className="font-poppins font-weight-bold text-white mb-0"
+            style={{
+              fontSize: "68px",
+              lineHeight: "100%",
+              letterSpacing: "0.68px",
+              marginTop: "16px",
+            }}
+          >
+            Payment Method.
+          </h1>
+
           <div className="d-none d-md-block">
-            <Button variant="primary">Get Started</Button>
+            <Button
+              className="mt-4"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(51, 187, 207, 1), rgba(51, 187, 207, 1))",
+                color: "white",
+                border: "none",
+                padding: "10px 20px",
+                borderRadius: "5px",
+                fontSize: "16px",
+                cursor: "pointer",
+              }}
+            >
+              Get Started
+            </Button>
           </div>
         </div>
 
-        <p className="font-poppins font-normal text-white-50 text-sm max-w-100 mt-2" style={{ color: '#FFF', fontSize: '18px', fontFamily: 'Poppins', lineHeight: '150%' }}>
-          Our team of experts uses a methodology to identify the credit cards most likely to fit your needs. We examine
-          annual percentage rates, annual fees.
+        <p
+          className="font-poppins font-normal text-white-50 text-sm max-w-100 mt-5"
+          style={{
+            color: "#FFF",
+            fontSize: "18px",
+            fontFamily: "Poppins",
+            lineHeight: "150%",
+          }}
+        >
+          Our team of experts uses a methodology to identify the credit cards
+          most likely to fit your needs. We examine annual percentage rates,
+          annual fees.
         </p>
       </div>
 
@@ -40,10 +97,6 @@ const Hero = () => {
         <div className="position-absolute z-index-1 w-80 h-80 rounded-circle white__gradient bottom-40" />
         <div className="position-absolute z-index-0 w-50 h-50 end-0 bottom-0 blue__gradient" />
         {/* gradient end */}
-      </div>
-
-      <div className="d-none d-md-block">
-        <Button variant="primary">Get Started</Button>
       </div>
     </section>
   );
