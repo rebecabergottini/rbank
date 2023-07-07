@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const SignUp = () => {
-  const [name, setName] = useState('');
-  const [address, setAddress] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [dni, setDni] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,17 +13,22 @@ const SignUp = () => {
     // utilizando fetch o axios
 
     // Resetear los campos del formulario
-    setName('');
-    setAddress('');
-    setEmail('');
-    setPassword('');
+    setName("");
+    setAddress("");
+    setEmail("");
+    setPassword("");
   };
 
   return (
     <div className="container-fluid h-screen d-flex align-items-center justify-content-center">
       <div className="col-sm-6 bg-gray-800">
-        <form onSubmit={handleSubmit} className="max-w-md w-100 p-4 rounded-lg bg-gray-900">
-          <h2 className="text-4xl text-white font-bold text-center mb-4">Sign Up</h2>
+        <form
+          onSubmit={handleSubmit}
+          className="max-w-md w-100 p-4 rounded-lg bg-gray-900"
+        >
+          <h2 className="text-4xl text-white font-bold text-center mb-4">
+            Sign Up
+          </h2>
           <div className="mb-3">
             <label htmlFor="name" className="form-label text-white">
               Name:
@@ -38,14 +43,14 @@ const SignUp = () => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="address" className="form-label text-white">
-              Address:
+            <label htmlFor="dni" className="form-label text-white">
+              DNI:
             </label>
             <input
               type="text"
-              id="address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              id="dni"
+              value={dni}
+              onChange={(e) => setDni(e.target.value)}
               className="form-control rounded-lg bg-gray-700 mt-2"
               required
             />

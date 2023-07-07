@@ -24,7 +24,16 @@ const Navbar = () => {
               className={`nav-item ${active === "Home" ? "active" : ""}`}
               onClick={() => setActive("Home")}
             >
-              <a className="nav-link" href="#" style={{ color: "#FFF", fontSize: "16px", fontFamily: "Poppins", lineHeight: "130%" }}>
+              <a
+                className="nav-link"
+                href="#"
+                style={{
+                  color: "#FFF",
+                  fontSize: "16px",
+                  fontFamily: "Poppins",
+                  lineHeight: "130%",
+                }}
+              >
                 Home
               </a>
             </li>
@@ -32,7 +41,16 @@ const Navbar = () => {
               className={`nav-item ${active === "Features" ? "active" : ""}`}
               onClick={() => setActive("Features")}
             >
-              <a className="nav-link" href="#" style={{ color: "#FFF", fontSize: "16px", fontFamily: "Poppins", lineHeight: "130%" }}>
+              <a
+                className="nav-link"
+                href="#"
+                style={{
+                  color: "#FFF",
+                  fontSize: "16px",
+                  fontFamily: "Poppins",
+                  lineHeight: "130%",
+                }}
+              >
                 Features
               </a>
             </li>
@@ -40,7 +58,16 @@ const Navbar = () => {
               className={`nav-item ${active === "Products" ? "active" : ""}`}
               onClick={() => setActive("Products")}
             >
-              <a className="nav-link" href="#" style={{ color: "#FFF", fontSize: "16px", fontFamily: "Poppins", lineHeight: "130%" }}>
+              <a
+                className="nav-link"
+                href="#"
+                style={{
+                  color: "#FFF",
+                  fontSize: "16px",
+                  fontFamily: "Poppins",
+                  lineHeight: "130%",
+                }}
+              >
                 Products
               </a>
             </li>
@@ -48,8 +75,45 @@ const Navbar = () => {
               className={`nav-item ${active === "Clients" ? "active" : ""}`}
               onClick={() => setActive("Clients")}
             >
-              <a className="nav-link" href="#" style={{ color: "#FFF", fontSize: "16px", fontFamily: "Poppins", lineHeight: "130%" }}>
+              <a
+                className="nav-link"
+                href="#"
+                style={{
+                  color: "#FFF",
+                  fontSize: "16px",
+                  fontFamily: "Poppins",
+                  lineHeight: "130%",
+                }}
+              >
                 Clients
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                className="nav-link"
+                href="/signin"
+                style={{
+                  color: "#FFF",
+                  fontSize: "16px",
+                  fontFamily: "Poppins",
+                  lineHeight: "130%",
+                }}
+              >
+                Sign In
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                className="nav-link"
+                href="/Signup"
+                style={{
+                  color: "#FFF",
+                  fontSize: "16px",
+                  fontFamily: "Poppins",
+                  lineHeight: "130%",
+                }}
+              >
+                Sign Up
               </a>
             </li>
           </ul>

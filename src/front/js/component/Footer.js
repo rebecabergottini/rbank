@@ -1,18 +1,48 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 
 const Footer = () => {
   return (
-    <footer className="py-4" style={{ background: "rgba(11, 10, 12, 0.6)" }}>
-      <Container className="d-flex flex-column flex-sm-row align-items-center justify-content-center text-center">
-        <h5 className="mr-3 mb-0 m-1">Legal Notice</h5>
-        <h5 className="mr-3 mb-0 m-1">Cookies</h5>
-        <h5 className="mr-3 mb-0 m-1">Personal Data</h5>
-        <h5 className="mr-3 mb-0 m-1">Legal Reports</h5>
-        <h5 className="mr-3 mb-0 m-1">Services</h5>
-        <h5 className="mb-0">Payment Services</h5>
-      </Container>
-    </footer>
+    <div className="footer section_padding">
+      <div className="footer-top">
+        <div className="footer-top-heading">
+          <img src="" alt="logo" />
+          <p>A new way to make the payments easy, reliable and secure</p>
+        </div>
+        <div className="footer-top-links">
+          <div className="footer-top-links-1">
+            <h4>Useful Links</h4>
+            <a href="">Content</a>
+            <a href="">How it Works</a>
+            <a href="">Create</a>
+            <a href="">Explore</a>
+            <a href="">Terms & Services</a>
+          </div>
+          <div className="footer-top-links-1">
+            <h4>Community</h4>
+            <a href="">Help Center</a>
+            <a href="">Partners</a>
+            <a href="">Suggestions</a>
+            <a href="">Blog</a>
+            <a href="">Newsletters</a>
+          </div>
+          <div className="footer-top-links-1">
+            <h4>Partner</h4>
+            <a href="">Our Partner</a>
+            <a href="">Become a Partner</a>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div className="footer-bottom">
+        <p>Copyright C 2023 RBank. All Rights Reserved.</p>
+        <div className="footer-bottom-icon">
+          <img src="" alt="instagram" />
+          <img src="" alt="facebook" />
+          <img src="" alt="twitter" />
+          <img src="" alt="linkedin" />
+        </div>
+      </div>
+    </div>
   );
 };
 

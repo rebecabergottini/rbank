@@ -6,8 +6,10 @@ import {
   Navbar,
   Stats,
   Testimonials,
+  CardDeal,
   Hero,
 } from "../component/index.js";
+import Dashboard from "./Dashboard.js";
 
 const Home = () => (
   <div className="bg-dark text-white w-full overflow-hidden">
@@ -25,6 +27,7 @@ const Home = () => (
         <Stats />
         <Business />
         <Testimonials />
+        <CardDeal />
         <Footer />
       </div>
     </div>

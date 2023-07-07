@@ -24,7 +24,9 @@ export default function Login() {
           onSubmit={handleSubmit}
           className="max-w-md w-100 p-4 rounded-lg bg-gray-900"
         >
-          <h2 className="text-4xl text-white font-bold text-center mb-4">SIGN IN</h2>
+          <h2 className="text-4xl text-white font-bold text-center mb-4">
+            Sign In
+          </h2>
           <div className="mb-3">
             <label htmlFor="username" className="form-label text-white">
               Username
@@ -51,7 +53,11 @@ export default function Login() {
           </div>
           <div className="d-flex justify-content-between text-white mb-3">
             <div className="form-check">
-              <input className="form-check-input" type="checkbox" id="remember" />
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="remember"
+              />
               <label className="form-check-label text-white" htmlFor="remember">
                 Remember Me
               </label>

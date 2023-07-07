@@ -4,5 +4,5 @@ import Stats from "./Stats";
 import Footer from "./Footer";
 import Testimonials from "./Testimonials";
 import Hero from "./Hero";
-
-export { Navbar, Business, Stats, Footer, Testimonials, Hero };
+import CardDeal from "./CardDeal";
+export { Navbar, Business, Stats, Footer, Testimonials, Hero, CardDeal };
