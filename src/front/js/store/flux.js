@@ -16,6 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
+      userData: null,
     },
     actions: {
       // Use getActions to call a function within a function
@@ -34,6 +35,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         // Reset the global store
         setStore({ demo: demo });
+      },
+
+      getUserData: async () => {
+        try {
+          const response = await axios.get("https://rebecabergottini-scaling-waffle-56qjpqjq6g4f44q6-3001.preview.app.github.dev/api/users");
+      
+          if (response.status === 200) {
+            // La respuesta contiene los datos del usuario
+            const userData = response.data;
+            console.log(userData);
+      
+            // Actualiza el estado de tu aplicación con los datos del usuario
+            setStore({ userData });
+      
+            return true;
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      
+        return false;
       },
 
       createUser: async (full_name, email, dni, password) => {

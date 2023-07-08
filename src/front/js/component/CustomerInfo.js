@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { Context } from "../store/appContext";
 
 const CustomerInfo = () => {
-  const customerData = {
-    fullName: "John Doe",
-    cardNumber: "**** **** **** 1234",
-    cardType: "Visa",
-  };
+  const { store, actions } = useContext(Context);
+
+  useEffect(() => {
+    actions.getUserData();
+  }, []);
 
   return (
     <div className="col-6">
@@ -20,15 +21,21 @@ const CustomerInfo = () => {
         }}
       >
         <h2 style={{ marginBottom: "10px" }}>Customer Information</h2>
-        <p>
-          <strong>Full Name:</strong> {customerData.fullName}
-        </p>
-        <p>
-          <strong>Card Number:</strong> {customerData.cardNumber}
-        </p>
-        <p>
-          <strong>Card Type:</strong> {customerData.cardType}
-        </p>
+        {store.userData ? (
+          <>
+            <p>
+              <strong>Full Name:</strong> {store.userData.full_name}
+            </p>
+            <p>
+              <strong>DNI:</strong> {store.userData.dni}
+            </p>
+            <p>
+              <strong>Email:</strong> {store.userData.email}
+            </p>
+          </>
+        ) : (
+          <p>Loading customer information...</p>
+        )}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, Blueprint, json
-from api.models import db, User
+from api.models import db, User, Account
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 from datetime import timedelta
@@ -25,11 +25,17 @@ def create_user():
 
     # Generar un hash de la contraseña
     password_hash = generate_password_hash(password)
-
     # Crear una nueva instancia del modelo User
     new_user = User(full_name=full_name, dni=dni, email=email, password_hash=password_hash)
     # Guardar el nuevo usuario en la base de datos
     db.session.add(new_user)
+    db.session.commit()
+
+    # Crear una nueva instancia del modelo Account
+    new_account = Account(user_id=new_user.id)
+    new_account.generate_account_number()
+    new_account.generate_iban()
+    db.session.add(new_account)
     db.session.commit()
 
     # Generar un token de autenticación
@@ -57,6 +63,43 @@ def login():
 
     return jsonify({"token": token}), 200
 
+
+@api.route('/transfer', methods=['POST'])
+@jwt_required()
+def transfer_money():
+    current_user_id = get_jwt_identity()
+    data = request.json
+    source_account_id = data['source_account_id']
+    destination_account_id = data['destination_account_id']
+    amount = data['amount']
+
+    source_account = Account.query.get(source_account_id)
+    destination_account = Account.query.get(destination_account_id)
+
+    if source_account is None or destination_account is None:
+        return jsonify({"message": "Invalid account ID"}), 404
+
+    if source_account.user_id != current_user_id:
+        return jsonify({"message": "Unauthorized"}), 401
+
+    success = source_account.transfer_money(destination_account, amount)
+
+    if success:
+        return jsonify({"message": "Transfer successful"}), 200
+    else:
+        return jsonify({"message": "Insufficient balance"}), 400
+
+@api.route('/users', methods=['GET'])
+def get_users():
+    users = User.query.all()
+    result = []
+    for user in users:
+        user_data = user.serialize()
+        accounts = Account.query.filter_by(user_id=user.id).all()
+        account_numbers = [account.account_number for account in accounts]
+        user_data['accounts'] = account_numbers
+        result.append(user_data)
+    return jsonify(result), 200
 
 # Access private route
 @api.route('/profile', methods=['GET'])    
