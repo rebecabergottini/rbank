@@ -36,27 +36,29 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ demo: demo });
       },
 
-      createUser: (username, email, password) => {
-        fetch(process.env.BACKEND_URL + "/api/signup", {
-          method: "POST",
-          body: JSON.stringify({
-            username,
-            email,
-            dni,
-            password,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
+      createUser: async (full_name, email, dni, password) => {
+        try {    
+        let response = await axios.post("https://rebecabergottini-silver-potato-pjjpx96969xc7j5w-3001.preview.app.github.dev/api/signup", {
+            full_name: full_name,
+            dni: dni,
+            email: email,
+            password: password
         })
-          .then((resp) => resp.json())
-          .then((data) => console.log(data));
-      },
-
+        if (response.status === 200) {
+          alert(response.data.msg)
+          return true;
+        }
+    } catch (error) {
+        if (error.response.status === 401)
+            alert(error.response.data.msg)
+        return false;
+      }
+    },
+    
       login: async (userEmail, userPassword) => {
         try {
           let response = await axios.post(
-            "https://rebecabergottini-automatic-lamp-pvr4qr4r4xjf9w5v-3001.preview.app.github.dev/api/login",
+            "https://rebecabergottini-silver-potato-pjjpx96969xc7j5w-3001.preview.app.github.dev/api/login",
             {
               email: userEmail,
               password: userPassword,

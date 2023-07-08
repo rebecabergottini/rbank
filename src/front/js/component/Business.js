@@ -1,9 +1,6 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Container from "./Container.js";
-import Star from "../../img/star.svg";
-import Shield from "../../img/shield.svg";
-import Send from "../../img/send.svg";
 
 const Business = () => {
   return (
@@ -18,7 +15,7 @@ const Business = () => {
       <div className="business-right_content">
         <div className="righ-content">
           <div className="right-content-image">
-            <img src={Star} alt="start" />
+            <img src="" alt="start" />
           </div>
           <div className="right-content-text">
             <h4>Rewards</h4>
@@ -31,7 +28,7 @@ const Business = () => {
 
         <div className="righ-content">
           <div className="right-content-image">
-            <img src={Shield} alt="shield" />
+            <img src="" alt="shield" />
           </div>
           <div className="right-content-text">
             <h4>100% Secured</h4>
@@ -44,7 +41,7 @@ const Business = () => {
 
         <div className="righ-content">
           <div className="right-content-image">
-            <img src={Send} alt="arrow" />
+            <img src="" alt="arrow" />
           </div>
           <div className="right-content-text">
             <h4>Balance Transfer</h4>

@@ -1,13 +1,11 @@
 import React from "react";
-import myImage from "../../img/discount.png";
-import robot from "../../img/robot.png";
 
 const Hero = () => {
   return (
     <div className="home" id="home">
       <div className="home-content">
         <div className="home-content-discount_stript bg-discount-gradient">
-          <img src={myImage} alt="discount png" />
+          <img src="" alt="discount png" />
           <p>20% Discount for 1 Month Account</p>
         </div>
         <div className="home-content-heading">

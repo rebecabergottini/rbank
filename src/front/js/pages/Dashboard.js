@@ -1,9 +1,8 @@
 import React from "react";
 import AccountSummary from "../component/AccountSummary.js";
-import TransferForm from "../component/TransferForm.js";
 import TransactionHistory from "../component/TransactionHistory.js";
 import CustomerInfo from "../component/CustomerInfo.js";
-import NavbarDash from "../component/NavBarDash.js";
+import NavbarDash from "../component/NavbarDash.js";
 
 const Dashboard = () => {
   return (

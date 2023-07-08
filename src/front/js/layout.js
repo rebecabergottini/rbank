@@ -8,7 +8,10 @@ import injectContext from "./store/appContext";
 import Home from "./pages/Home.js";
 import Login from "./pages/Login.js";
 import Signup from "./pages/Signup.js";
-import TransferForm from "./component/TransferForm";
+import TransferForm from "./component/TransferForm.js";
+import Dashboard from "./pages/Dashboard.js";
+
+
 //create your first component
 const Layout = () => {
   //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -25,8 +28,9 @@ const Layout = () => {
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<Signup />} path="/signup" />
-            <Route element={<Login />} path="/signin" />
+            <Route element={<Login />} path="/login" />
             <Route element={<TransferForm />} path="/transfers" />
+            <Route element={<Dashboard />} path="/dashboard" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
           {/* <Footer /> */}

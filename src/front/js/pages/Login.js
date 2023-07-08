@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { store, actions } = useContext(Context);
+  const { actions } = useContext(Context);
 
   let navigate = useNavigate();
 
@@ -28,15 +28,15 @@ export default function Login() {
             Sign In
           </h2>
           <div className="mb-3">
-            <label htmlFor="username" className="form-label text-white">
-              Username
+            <label htmlFor="email" className="form-label text-white">
+              email
             </label>
             <input
               type="text"
               onChange={(e) => setEmail(e.target.value)}
               className="form-control rounded-lg bg-gray-700 mt-2"
-              id="username"
-              autoComplete="username"
+              id="email"
+              autoComplete="email"
             />
           </div>
           <div className="mb-3">

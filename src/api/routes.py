@@ -1,10 +1,11 @@
-from flask import Flask, request, jsonify, url_for, Blueprint, json
+from flask import Flask, request, jsonify, Blueprint, json
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
-from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
+from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 from datetime import timedelta
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
+import jwt
 
 api = Blueprint('api', __name__)
 CORS(api)
@@ -13,7 +14,6 @@ CORS(api)
 @api.route('/signup', methods=['POST'])
 def create_user():
     full_name = request.json.get('full_name')
-    address = request.json.get('address')
     dni = request.json.get('dni')
     email = request.json.get('email')
     password = request.json.get('password')
@@ -21,17 +21,21 @@ def create_user():
     # Verificar si el usuario ya existe en la base de datos
     existing_user = User.query.filter_by(email=email).first()
     if existing_user:
-        return jsonify({'message': 'El usuario ya está registrado'}), 400
+        return jsonify({'message': 'User is already registered'}), 400
+
+    # Generar un hash de la contraseña
+    password_hash = generate_password_hash(password)
 
     # Crear una nueva instancia del modelo User
-    new_user = User(full_name=full_name, address=address, dni=dni, email=email, password=password)
-    new_user.set_password(password)
+    new_user = User(full_name=full_name, dni=dni, email=email, password_hash=password_hash)
     # Guardar el nuevo usuario en la base de datos
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({'message': 'Usuario registrado exitosamente'}), 201
+    # Generar un token de autenticación
+    token = jwt.encode({'email': email}, 'secret_key', algorithm='HS256')
 
+    return jsonify({'message': 'User successfully registered', 'token': token}), 201
 
 @api.route('/login', methods=['POST'])
 def login():

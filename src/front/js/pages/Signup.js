@@ -1,23 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../store/appContext.js";
+import { useNavigate } from "react-router-dom"
 
-const SignUp = () => {
-  const [name, setName] = useState("");
+const Signup = () => {
+  const [full_name, setFullName] = useState("");
   const [dni, setDni] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [checkConditions, setCheckConditions] = useState(false)
 
-  const handleSubmit = (e) => {
+  const { actions } = useContext(Context)
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Aquí puedes realizar la lógica para enviar los datos de registro al servidor
-    // utilizando fetch o axios
-
-    // Resetear los campos del formulario
-    setName("");
-    setAddress("");
-    setEmail("");
-    setPassword("");
+    if (checkConditions && full_name && dni && email && password) {
+      let isLogged = await actions.createUser(full_name, dni, email, password);
+      if (isLogged) {
+        setFullName("");
+        setDni("");
+        setEmail("");
+        setPassword("");
+        navigate("/");
+      }
+    }
   };
+
 
   return (
     <div className="container-fluid h-screen d-flex align-items-center justify-content-center">
@@ -30,14 +38,14 @@ const SignUp = () => {
             Sign Up
           </h2>
           <div className="mb-3">
-            <label htmlFor="name" className="form-label text-white">
-              Name:
+            <label htmlFor="username" className="form-label text-white">
+              Full Name:
             </label>
             <input
               type="text"
               id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={full_name}
+              onChange={(e) => setFullName(e.target.value)}
               className="form-control rounded-lg bg-gray-700 mt-2"
               required
             />
@@ -81,7 +89,14 @@ const SignUp = () => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary w-100 mt-4">
+          <div className="m-3 form-check ">
+          <input type="checkbox" className="form-check-input" id="checkConditions" onChange={e => setCheckConditions(e.target.checked)} />
+                      <label className="form-check-label" htmlFor="checkConditions">I agree to the terms of service.</label>
+                    </div>
+
+          <button  
+          type="submit"
+          className="btn btn-primary w-100 mt-4">
             Register
           </button>
         </form>
@@ -90,4 +105,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Signup;

@@ -9,10 +9,8 @@ class User(db.Model):
     # Define the User model with necessary columns
     id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(255), nullable=False)
-    address = db.Column(db.String(255), nullable=False)
     dni = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False, name="user_email")
-    password = db.Column(db.String(10), unique=False, nullable=False)
     password_hash = db.Column(db.String(255), unique=False, nullable=False)
 
     def __repr__(self):
@@ -23,7 +21,6 @@ class User(db.Model):
         return {
             "id": self.id,
             "full_name": self.full_name,
-            "address": self.address,
             "dni": self.dni,
             "email": self.email,
 
@@ -39,6 +36,6 @@ class User(db.Model):
     def check_password(self, password):
         # Check if the provided password matches the stored password hash
         try:
-            return ph.verify(self.password, password)
+            return ph.verify(self.password_hash, password)
         except argon2.exceptions.VerifyMismatchError:
             return False
