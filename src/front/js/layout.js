@@ -11,7 +11,6 @@ import Signup from "./pages/Signup.js";
 import TransferForm from "./component/TransferForm.js";
 import Dashboard from "./pages/Dashboard.js";
 
-
 //create your first component
 const Layout = () => {
   //the basename is used when your project is published in a subdirectory and not in the root of the domain

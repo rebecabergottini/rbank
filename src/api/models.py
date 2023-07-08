@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from argon2 import PasswordHasher
+import argon2
 
 ph = PasswordHasher()
 db = SQLAlchemy()

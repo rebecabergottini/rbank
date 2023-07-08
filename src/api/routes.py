@@ -42,14 +42,22 @@ def login():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
 
-    user = User.query.filter_by(email=email, password=password).first()
-    
+    user = User.query.filter_by(email=email).first()
+
     if user is None:
         return jsonify({"msg": "Bad username or password"}), 404
-    
-    if email != user.email or password != user.password:
-        return jsonify({"msg": "Bad email or password"}), 401
-    
+
+    # Regenerar la contraseña para asegurarse de que esté en el formato correcto
+    user.set_password(password)
+
+    if not user.check_password(password):
+        return jsonify({"msg": "Bad username or password"}), 401
+
+    token = create_access_token(identity=user.id)
+
+    return jsonify({"token": token}), 200
+
+
 # Access private route
 @api.route('/profile', methods=['GET'])    
 @jwt_required()

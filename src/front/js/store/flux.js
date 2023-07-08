@@ -38,7 +38,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       createUser: async (full_name, email, dni, password) => {
         try {    
-        let response = await axios.post("https://rebecabergottini-silver-potato-pjjpx96969xc7j5w-3001.preview.app.github.dev/api/signup", {
+        let response = await axios.post("https://rebecabergottini-scaling-waffle-56qjpqjq6g4f44q6-3001.preview.app.github.dev//api/signup", {
             full_name: full_name,
             dni: dni,
             email: email,
@@ -58,7 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       login: async (userEmail, userPassword) => {
         try {
           let response = await axios.post(
-            "https://rebecabergottini-silver-potato-pjjpx96969xc7j5w-3001.preview.app.github.dev/api/login",
+            "https://rebecabergottini-scaling-waffle-56qjpqjq6g4f44q6-3001.preview.app.github.dev//api/login",
             {
               email: userEmail,
               password: userPassword,
@@ -77,8 +77,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       logout: () => {
-        let token = localStorage.getItem("myToken");
-        return token != null ? true : false;
+        localStorage.removeItem("myToken");
+        return false;
       },
     },
   };

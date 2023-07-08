@@ -13,7 +13,7 @@ export default function Login() {
     e.preventDefault();
     let isLogged = await actions.login(email, password);
     if (isLogged) {
-      navigate("/");
+      navigate("/dashboard");
     }
   }
 
@@ -25,11 +25,11 @@ export default function Login() {
           className="max-w-md w-100 p-4 rounded-lg bg-gray-900"
         >
           <h2 className="text-4xl text-white font-bold text-center mb-4">
-            Sign In
+            Log in
           </h2>
           <div className="mb-3">
             <label htmlFor="email" className="form-label text-white">
-              email
+              Email
             </label>
             <input
               type="text"
@@ -65,7 +65,7 @@ export default function Login() {
             <a href="#">Forgot Password</a>
           </div>
           <button type="submit" className="btn btn-primary w-100 mt-4">
-            SIGN IN
+            Log in
           </button>
         </form>
       </div>

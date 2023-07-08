@@ -91,7 +91,7 @@ const Navbar = () => {
             <li className="nav-item">
               <a
                 className="nav-link"
-                href="/signin"
+                href="/login"
                 style={{
                   color: "#FFF",
                   fontSize: "16px",
@@ -99,13 +99,13 @@ const Navbar = () => {
                   lineHeight: "130%",
                 }}
               >
-                Sign In
+                Login
               </a>
             </li>
             <li className="nav-item">
               <a
                 className="nav-link"
-                href="/Signup"
+                href="/signup"
                 style={{
                   color: "#FFF",
                   fontSize: "16px",

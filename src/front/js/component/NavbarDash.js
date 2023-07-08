@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 const NavbarDash = () => {
-  const handleTransfer = () => {
-    // Logic to handle transfer action
-    console.log("Transfer money");
-  };
+  const { actions } = useContext(Context);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Logic to handle logout action
-    console.log("Logout");
+    actions.logout();
+    localStorage.removeItem("myToken");
+    navigate("/");
   };
-
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
@@ -29,28 +29,28 @@ const NavbarDash = () => {
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
               <a className="nav-link" href="/accounts">
-                Accounts
+                Cuentas
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/transfers">
-                Transfers
+                Transferencias
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/payments">
-                Payments
+                Pagos
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/settings">
-                Settings
+                Configuración
               </a>
             </li>
             <li className="nav-item">
-              <button className="btn btn-secondary" onClick={handleLogout}>
-                Logout
-              </button>
+            <button className="btn btn-secondary" onClick={handleLogout}>
+              Logout
+            </button>
             </li>
           </ul>
         </div>
