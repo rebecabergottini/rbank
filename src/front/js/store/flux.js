@@ -1,23 +1,11 @@
 import axios from "axios";
 
-const getState = ({ getStore, getActions, setStore }) => {
+const getState = ({ setStore }) => {
   return {
     store: {
       message: null,
-      demo: [
-        {
-          title: "FIRST",
-          background: "white",
-          initial: "white",
-        },
-        {
-          title: "SECOND",
-          background: "white",
-          initial: "white",
-        },
-      ],
-      userData: null,
-    },
+      user: {},
+      },
     actions: {
       // Use getActions to call a function within a function
       exampleFunction: () => {
@@ -37,30 +25,32 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ demo: demo });
       },
 
-      getUserData: async () => {
-        try {
-          const response = await axios.get("https://rebecabergottini-scaling-waffle-56qjpqjq6g4f44q6-3001.preview.app.github.dev/api/users");
-      
-          if (response.status === 200) {
-            // La respuesta contiene los datos del usuario
-            const userData = response.data;
-            console.log(userData);
-      
-            // Actualiza el estado de tu aplicación con los datos del usuario
-            setStore({ userData });
-      
-            return true;
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      
-        return false;
-      },
+      // getUserProfile: () => {
+      //   const token = getToken(); // Obtener el token almacenado
 
+      //   if (token) {
+      //     axios
+      //       .get("https://rebecabergottini-scaling-waffle-56qjpqjq6g4f44q6-3001.preview.app.github.dev/api/profile", {
+      //         headers: {
+      //           "Content-Type": "application/json"
+      //         },
+      //       })
+      //       .then((response) => {
+      //         console.log(response.data); // Imprimir datos del perfil en la consola
+      //         setStore({ user: response.data });
+      //       })
+      //       .catch((error) => {
+      //         console.error(error); // Manejar el error de la solicitud
+      //       });
+      //   } else {
+      //     console.log("No se encontró ningún token"); // Manejar el caso en el que no hay un token almacenado
+      //   }
+      // },
+
+      
       createUser: async (full_name, email, dni, password) => {
         try {    
-        let response = await axios.post("https://rebecabergottini-scaling-waffle-56qjpqjq6g4f44q6-3001.preview.app.github.dev//api/signup", {
+        let response = await axios.post("https://rebecabergottini-scaling-waffle-56qjpqjq6g4f44q6-3001.preview.app.github.dev/api/signup", {
             full_name: full_name,
             dni: dni,
             email: email,
@@ -80,7 +70,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       login: async (userEmail, userPassword) => {
         try {
           let response = await axios.post(
-            "https://rebecabergottini-scaling-waffle-56qjpqjq6g4f44q6-3001.preview.app.github.dev//api/login",
+            "https://rebecabergottini-scaling-waffle-56qjpqjq6g4f44q6-3001.preview.app.github.dev/api/login",
             {
               email: userEmail,
               password: userPassword,
@@ -99,8 +89,11 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       logout: () => {
-        localStorage.removeItem("myToken");
-        return false;
+        localStorage.removeItem("token");
+        localStorage.removeItem("auth");
+        setStore({
+          auth: false,
+        });
       },
     },
   };

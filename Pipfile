@@ -24,6 +24,7 @@ argon2-cffi = "*"
 colorama = "*"
 cors = "*"
 python-stdnum = "*"
+faker = "*"
 
 [requires]
 python_version = "3.10"

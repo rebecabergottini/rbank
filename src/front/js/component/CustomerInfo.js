@@ -1,12 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 
 const CustomerInfo = () => {
   const { store, actions } = useContext(Context);
 
-  useEffect(() => {
-    actions.getUserData();
-  }, []);
+  // useEffect(() => {
+  //   actions.getUserProfile();
+  // }, []);
 
   return (
     <div className="col-6">
@@ -21,21 +21,12 @@ const CustomerInfo = () => {
         }}
       >
         <h2 style={{ marginBottom: "10px" }}>Customer Information</h2>
-        {store.userData ? (
-          <>
             <p>
-              <strong>Full Name:</strong> {store.userData.full_name}
+              <strong>Full Name:</strong> {store.user.full_name}
             </p>
             <p>
-              <strong>DNI:</strong> {store.userData.dni}
+              <strong>IBAN:</strong> {store.user.iban}
             </p>
-            <p>
-              <strong>Email:</strong> {store.userData.email}
-            </p>
-          </>
-        ) : (
-          <p>Loading customer information...</p>
-        )}
       </div>
     </div>
   );

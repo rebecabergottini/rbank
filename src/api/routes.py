@@ -6,6 +6,8 @@ from datetime import timedelta
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
+import random
+import string
 
 api = Blueprint('api', __name__)
 CORS(api)
@@ -23,19 +25,17 @@ def create_user():
     if existing_user:
         return jsonify({'message': 'User is already registered'}), 400
 
+    # Genera un número de cuenta y IBAN aleatorio
+    iban = Account.generate_iban()
+
     # Generar un hash de la contraseña
     password_hash = generate_password_hash(password)
+
     # Crear una nueva instancia del modelo User
-    new_user = User(full_name=full_name, dni=dni, email=email, password_hash=password_hash)
+    new_user = User(full_name=full_name, dni=dni, email=email, password_hash=password_hash, iban=iban)
+
     # Guardar el nuevo usuario en la base de datos
     db.session.add(new_user)
-    db.session.commit()
-
-    # Crear una nueva instancia del modelo Account
-    new_account = Account(user_id=new_user.id)
-    new_account.generate_account_number()
-    new_account.generate_iban()
-    db.session.add(new_account)
     db.session.commit()
 
     # Generar un token de autenticación
@@ -59,7 +59,8 @@ def login():
     if not user.check_password(password):
         return jsonify({"msg": "Bad username or password"}), 401
 
-    token = create_access_token(identity=user.id)
+    # Generar el token de acceso con el correo electrónico como identidad
+    token = create_access_token(identity=user.email)
 
     return jsonify({"token": token}), 200
 
@@ -101,10 +102,9 @@ def get_users():
         result.append(user_data)
     return jsonify(result), 200
 
-# Access private route
-@api.route('/profile', methods=['GET'])    
+@api.route('/profile', methods=['GET'])
 @jwt_required()
-def access_profile():
+def user_profile():
     current_user = get_jwt_identity()
     user = User.query.filter_by(email=current_user).first()
-    return jsonify({"msg": "acceso permitido"}), 200
+    return jsonify(user.serialize()), 200
