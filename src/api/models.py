@@ -16,6 +16,8 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False, name="user_email")
     password_hash = db.Column(db.String(255), unique=False, nullable=False)
     iban = db.Column(db.String(34), unique=True, nullable=False)
+    accounts = db.relationship('Account', backref='user', lazy=True)
+    balance = db.Column(db.Float, default=0.0)  # Agregar el atributo balance
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -26,7 +28,9 @@ class User(db.Model):
             "full_name": self.full_name,
             "dni": self.dni,
             "email": self.email,
-            "iban": self.iban
+            "iban": self.iban,
+            "accounts": self.accounts,
+            "balance": self.balance
         }
 
     def set_password(self, password):
@@ -57,3 +61,21 @@ class Account(db.Model):
         control_digit = str(98 - (int(account_data) % 97)).zfill(2)
         iban = country_code + control_digit + account_data
         return iban
+    
+
+class Transaction(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    receiver_iban = db.Column(db.String(34), nullable=False)
+    amount = db.Column(db.Float, nullable=False)
+
+    def __repr__(self):
+        return f'<Transaction {self.id}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "sender_id": self.sender_id,
+            "receiver_iban": self.receiver_iban,
+            "amount": self.amount
+        }

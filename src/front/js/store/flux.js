@@ -4,7 +4,7 @@ const getState = ({ setStore }) => {
   return {
     store: {
       message: null,
-      user: {},
+      user: {}, // Estado inicial del usuario
       },
     actions: {
       // Use getActions to call a function within a function
@@ -20,10 +20,12 @@ const getState = ({ setStore }) => {
           if (i === index) elm.background = color;
           return elm;
         });
-
+a
         // Reset the global store
         setStore({ demo: demo });
       },
+
+      // Función para obtener el perfil del usuario
 
       // getUserProfile: () => {
       //   const token = getToken(); // Obtener el token almacenado
@@ -47,7 +49,7 @@ const getState = ({ setStore }) => {
       //   }
       // },
 
-      
+      // Función para crear un nuevo usuario
       createUser: async (full_name, email, dni, password) => {
         try {    
         let response = await axios.post("https://rebecabergottini-scaling-waffle-56qjpqjq6g4f44q6-3001.preview.app.github.dev/api/signup", {
@@ -56,17 +58,18 @@ const getState = ({ setStore }) => {
             email: email,
             password: password
         })
-        if (response.status === 200) {
-          alert(response.data.msg)
+          localStorage.setItem("token", response.data.access_token); // Almacenar el token en el localStorage
+          localStorage.setItem("auth", true); // Establecer el estado de autenticación a true
+          setStore({
+            auth: true,
+          }); // Actualizar el estado
           return true;
+        } catch (error) {
+          alert(error);
         }
-    } catch (error) {
-        if (error.response.status === 401)
-            alert(error.response.data.msg)
-        return false;
-      }
-    },
+      },
     
+      // Función para iniciar sesión
       login: async (userEmail, userPassword) => {
         try {
           let response = await axios.post(
@@ -76,24 +79,24 @@ const getState = ({ setStore }) => {
               password: userPassword,
             }
           );
-          console.log(response);
-
+          localStorage.setItem("token", response.data.access_token); // Almacenar el token en el localStorage
+          localStorage.setItem("auth", true); // Establecer el estado de autenticación a true
+          setStore({
+            auth: true,
+          }); // Actualizar el estado
           return true;
-        } catch (err) {
-          console.log(err);
-
-          if (err.response.status === 404) {
-            return false;
-          }
+        } catch (error) {
+          alert(error);
         }
       },
 
+      // Función para cerrar sesión
       logout: () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("auth");
+        localStorage.removeItem("token"); // Eliminar el token del localStorage
+        localStorage.removeItem("auth"); // Eliminar el estado de autenticación del localStorage
         setStore({
-          auth: false,
-        });
+          auth: false, // Establecer el estado de autenticación a false
+        }); // Actualizar el estado
       },
     },
   };

@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, Blueprint, json
-from api.models import db, User, Account
+from api.models import db, User, Account, Transaction
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 from datetime import timedelta
@@ -33,7 +33,7 @@ def create_user():
 
     # Crear una nueva instancia del modelo User
     new_user = User(full_name=full_name, dni=dni, email=email, password_hash=password_hash, iban=iban)
-
+    new_user.balance = 500
     # Guardar el nuevo usuario en la base de datos
     db.session.add(new_user)
     db.session.commit()
@@ -64,32 +64,6 @@ def login():
 
     return jsonify({"token": token}), 200
 
-
-@api.route('/transfer', methods=['POST'])
-@jwt_required()
-def transfer_money():
-    current_user_id = get_jwt_identity()
-    data = request.json
-    source_account_id = data['source_account_id']
-    destination_account_id = data['destination_account_id']
-    amount = data['amount']
-
-    source_account = Account.query.get(source_account_id)
-    destination_account = Account.query.get(destination_account_id)
-
-    if source_account is None or destination_account is None:
-        return jsonify({"message": "Invalid account ID"}), 404
-
-    if source_account.user_id != current_user_id:
-        return jsonify({"message": "Unauthorized"}), 401
-
-    success = source_account.transfer_money(destination_account, amount)
-
-    if success:
-        return jsonify({"message": "Transfer successful"}), 200
-    else:
-        return jsonify({"message": "Insufficient balance"}), 400
-
 @api.route('/users', methods=['GET'])
 def get_users():
     users = User.query.all()
@@ -108,3 +82,52 @@ def user_profile():
     current_user = get_jwt_identity()
     user = User.query.filter_by(email=current_user).first()
     return jsonify(user.serialize()), 200
+
+from api.models import User
+
+@api.route('/transactions', methods=['POST'])
+@jwt_required()
+def create_transaction():
+    current_user_email = get_jwt_identity()
+    data = request.json
+    receiver_iban = data['receiver_iban']
+    amount = data['amount']
+
+    sender = User.query.filter_by(email=current_user_email).first()
+    receiver = User.query.filter_by(iban=receiver_iban).first()
+
+    if receiver is None:
+        return jsonify({"message": "Invalid receiver IBAN"}), 404
+
+    if sender.email == receiver.email:
+        return jsonify({"message": "Cannot transfer to own account"}), 400
+
+    if amount <= 0:
+        return jsonify({"message": "Invalid amount"}), 400
+
+    if sender.balance is None:
+        sender.balance = 0.0
+
+    if sender.balance < amount:
+        return jsonify({"message": "Insufficient balance"}), 400
+
+    # Realizar la transferencia
+    sender.balance -= amount
+    receiver.balance += amount
+
+    # Crear una nueva instancia de Transaction
+    transaction = Transaction(sender_id=sender.id, receiver_iban=receiver_iban, amount=amount)
+
+    # Guardar la transacción en la base de datos
+    db.session.add(transaction)
+    db.session.commit()
+
+    return jsonify({"message": "Transaction created successfully"}), 201
+
+
+
+@api.route('/transactions', methods=['GET'])
+def get_transactions():
+    transactions = Transaction.query.all()
+    serialized_transactions = [transaction.serialize() for transaction in transactions]
+    return jsonify(serialized_transactions), 200
