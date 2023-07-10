@@ -1,22 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../store/appContext.js";
 
 const TransferForm = () => {
   const [iban, setIban] = useState("");
-  const [beneficiaryName, setBeneficiaryName] = useState("");
   const [amount, setAmount] = useState("");
-  const [additionalData, setAdditionalData] = useState("");
+  const { actions } = useContext(Context)
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Lógica para enviar los datos del formulario al backend o realizar acciones adicionales
-
-    // Restablecer los campos del formulario después de enviar los datos
+    // Validar los campos del formulario
+    if (iban === "" || amount === "") {
+      alert("Please fill in all fields");
+      return;
+    }
+    // Llamar a la función transfer de la tienda Flux
+    const success = await actions.transfer(iban, amount);
+  
+    if (success) {
+      // Realizar acciones adicionales en caso de éxito, como mostrar un mensaje o actualizar la lista de transferencias realizadas
+      console.log("Transfer successful");
+    } else {
+      // Realizar acciones adicionales en caso de error, como mostrar un mensaje de error
+      console.log("Transfer failed");
+    }  
+    // Restablecer los campos del formulario
     setIban("");
-    setBeneficiaryName("");
     setAmount("");
-    setAdditionalData("");
   };
+  
 
   return (
     <div className="transferform-container">
@@ -37,19 +49,6 @@ const TransferForm = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="beneficiaryName" className="form-label">
-              Beneficiary Name
-            </label>
-            <input
-              type="text"
-              id="beneficiaryName"
-              className="form-control"
-              value={beneficiaryName}
-              onChange={(e) => setBeneficiaryName(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
             <label htmlFor="amount" className="form-label">
               Amount
             </label>
@@ -61,17 +60,6 @@ const TransferForm = () => {
               onChange={(e) => setAmount(e.target.value)}
               required
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="additionalData" className="form-label">
-              Additional Data (Subject)
-            </label>
-            <textarea
-              id="additionalData"
-              className="form-control"
-              value={additionalData}
-              onChange={(e) => setAdditionalData(e.target.value)}
-            ></textarea>
           </div>
           <button type="submit" className="btn btn-primary">
             Transfer

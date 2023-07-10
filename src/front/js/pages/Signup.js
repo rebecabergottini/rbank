@@ -15,7 +15,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (checkConditions && full_name && dni && email && password) {
-      let isLogged = await actions.createUser(full_name, dni, email, password);
+      let isLogged = await actions.createUser(full_name, email,dni, password);
       if (isLogged) {
         setFullName("");
         setDni("");

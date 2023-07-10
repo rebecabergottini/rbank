@@ -13,11 +13,12 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(255), nullable=False)
     dni = db.Column(db.String(20), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False, name="user_email")
+    email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), unique=False, nullable=False)
     iban = db.Column(db.String(34), unique=True, nullable=False)
-    accounts = db.relationship('Account', backref='user', lazy=True)
-    balance = db.Column(db.Float, default=0.0)  # Agregar el atributo balance
+    balance = db.Column(db.Float, default=0.0)
+    transfers_sent = db.relationship('Transfer', backref='sender', lazy=True, foreign_keys='Transfer.sender_id')
+    transfers_received = db.relationship('Transfer', backref='receiver', lazy=True, foreign_keys='Transfer.receiver_id')
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -29,7 +30,6 @@ class User(db.Model):
             "dni": self.dni,
             "email": self.email,
             "iban": self.iban,
-            "accounts": self.accounts,
             "balance": self.balance
         }
 
@@ -62,16 +62,16 @@ class Account(db.Model):
         iban = country_code + control_digit + account_data
         return iban
     
-
-class Transaction(db.Model):
+class Transfer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    receiver_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     receiver_iban = db.Column(db.String(34), nullable=False)
     amount = db.Column(db.Float, nullable=False)
 
     def __repr__(self):
-        return f'<Transaction {self.id}>'
-
+        return f'<Transfer {self.id}>'
+    
     def serialize(self):
         return {
             "id": self.id,

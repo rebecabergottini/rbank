@@ -25,37 +25,14 @@ a
         setStore({ demo: demo });
       },
 
-      // Función para obtener el perfil del usuario
-
-      // getUserProfile: () => {
-      //   const token = getToken(); // Obtener el token almacenado
-
-      //   if (token) {
-      //     axios
-      //       .get("https://rebecabergottini-scaling-waffle-56qjpqjq6g4f44q6-3001.preview.app.github.dev/api/profile", {
-      //         headers: {
-      //           "Content-Type": "application/json"
-      //         },
-      //       })
-      //       .then((response) => {
-      //         console.log(response.data); // Imprimir datos del perfil en la consola
-      //         setStore({ user: response.data });
-      //       })
-      //       .catch((error) => {
-      //         console.error(error); // Manejar el error de la solicitud
-      //       });
-      //   } else {
-      //     console.log("No se encontró ningún token"); // Manejar el caso en el que no hay un token almacenado
-      //   }
-      // },
 
       // Función para crear un nuevo usuario
       createUser: async (full_name, email, dni, password) => {
         try {    
-        let response = await axios.post("https://rebecabergottini-scaling-waffle-56qjpqjq6g4f44q6-3001.preview.app.github.dev/api/signup", {
+        let response = await axios.post("https://rebecabergottini-jubilant-engine-v4v97v96677hxvww-3001.preview.app.github.dev/api/signup", {
             full_name: full_name,
-            dni: dni,
             email: email,
+            dni: dni,
             password: password
         })
           localStorage.setItem("token", response.data.access_token); // Almacenar el token en el localStorage
@@ -70,13 +47,13 @@ a
       },
     
       // Función para iniciar sesión
-      login: async (userEmail, userPassword) => {
+      login: async (email, password) => {
         try {
           let response = await axios.post(
-            "https://rebecabergottini-scaling-waffle-56qjpqjq6g4f44q6-3001.preview.app.github.dev/api/login",
+            "https://rebecabergottini-jubilant-engine-v4v97v96677hxvww-3001.preview.app.github.dev/api/login",
             {
-              email: userEmail,
-              password: userPassword,
+              email: email,
+              password: password,
             }
           );
           localStorage.setItem("token", response.data.access_token); // Almacenar el token en el localStorage
@@ -84,6 +61,7 @@ a
           setStore({
             auth: true,
           }); // Actualizar el estado
+          setStore({user:response.data.user})
           return true;
         } catch (error) {
           alert(error);
@@ -98,6 +76,29 @@ a
           auth: false, // Establecer el estado de autenticación a false
         }); // Actualizar el estado
       },
+
+      // // Funcion para hacer la transferencia
+      // transfer: async (iban, amount) => {
+      //   try {
+      //     const token = localStorage.getItem("token"); // Obtener el token de autenticación del localStorage
+      
+      //     await axios.post(
+      //       "https://rebecabergottini-jubilant-engine-v4v97v96677hxvww-3001.preview.app.github.dev/api/transfers",
+      //       {
+      //         receiver_iban: iban,
+      //         amount: amount
+      //       },
+      //       {
+      //         headers: {
+      //           "Authorization": "Bearer " + token
+      //         }
+      //       }
+      //     );      
+      //     return true;
+      //   } catch (error) {
+      //     alert(error);
+      //   }
+      // }      
     },
   };
 };

@@ -1,13 +1,12 @@
 from flask import Flask, request, jsonify, Blueprint, json
-from api.models import db, User, Account, Transaction
+from api.models import db, User, Account
+from api.models import Transfer
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 from datetime import timedelta
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
-import random
-import string
 
 api = Blueprint('api', __name__)
 CORS(api)
@@ -41,7 +40,7 @@ def create_user():
     # Generar un token de autenticación
     token = jwt.encode({'email': email}, 'secret_key', algorithm='HS256')
 
-    return jsonify({'message': 'User successfully registered', 'token': token}), 201
+    return jsonify({'message': 'User successfully registered', 'token': token, "user":new_user.serialize()}), 201
 
 @api.route('/login', methods=['POST'])
 def login():
@@ -62,7 +61,7 @@ def login():
     # Generar el token de acceso con el correo electrónico como identidad
     token = create_access_token(identity=user.email)
 
-    return jsonify({"token": token}), 200
+    return jsonify({"token": token,"user":user.serialize()}), 200
 
 @api.route('/users', methods=['GET'])
 def get_users():
@@ -83,51 +82,73 @@ def user_profile():
     user = User.query.filter_by(email=current_user).first()
     return jsonify(user.serialize()), 200
 
-from api.models import User
-
-@api.route('/transactions', methods=['POST'])
+@api.route('/transfers', methods=['POST'])
 @jwt_required()
-def create_transaction():
+def create_transfer():
+    # Obtener el correo electrónico del usuario actual desde el token JWT
     current_user_email = get_jwt_identity()
+    
+    # Obtener los datos de la transferencia del cuerpo de la solicitud
     data = request.json
     receiver_iban = data['receiver_iban']
     amount = data['amount']
-
+    
+    # Buscar al remitente y destinatario en la base de datos
     sender = User.query.filter_by(email=current_user_email).first()
     receiver = User.query.filter_by(iban=receiver_iban).first()
 
+    # Verificar si el destinatario es válido
     if receiver is None:
-        return jsonify({"message": "Invalid receiver IBAN"}), 404
+        return jsonify({"message": "IBAN de destinatario inválido"}), 404
 
+    # Verificar si el remitente y el destinatario son la misma cuenta
     if sender.email == receiver.email:
-        return jsonify({"message": "Cannot transfer to own account"}), 400
+        return jsonify({"message": "No se puede transferir a la propia cuenta"}), 400
 
+    # Verificar si el monto de la transferencia es válido
     if amount <= 0:
-        return jsonify({"message": "Invalid amount"}), 400
+        return jsonify({"message": "Monto inválido"}), 400
 
+    # Verificar si el remitente tiene suficiente saldo
     if sender.balance is None:
         sender.balance = 0.0
 
     if sender.balance < amount:
-        return jsonify({"message": "Insufficient balance"}), 400
+        return jsonify({"message": "Saldo insuficiente"}), 400
 
     # Realizar la transferencia
     sender.balance -= amount
     receiver.balance += amount
 
-    # Crear una nueva instancia de Transaction
-    transaction = Transaction(sender_id=sender.id, receiver_iban=receiver_iban, amount=amount)
+    # Crear una nueva instancia de Transfer (Transferencia)
+    transfer = Transfer(sender_id=sender.id, receiver_id=receiver.id, receiver_iban=receiver_iban, amount=amount)
 
-    # Guardar la transacción en la base de datos
-    db.session.add(transaction)
+    # Guardar la transferencia en la base de datos
+    db.session.add(transfer)
     db.session.commit()
 
-    return jsonify({"message": "Transaction created successfully"}), 201
+    return jsonify({"message": "Transferencia creada exitosamente"}), 201
 
 
+@api.route('/transfers', methods=['GET'])
+@jwt_required()
+def get_transfers():
+    # Obtener el correo electrónico del usuario actual desde el token JWT
+    current_user_email = get_jwt_identity()
+    
+    # Buscar al usuario en la base de datos
+    user = User.query.filter_by(email=current_user_email).first()
 
-@api.route('/transactions', methods=['GET'])
-def get_transactions():
-    transactions = Transaction.query.all()
-    serialized_transactions = [transaction.serialize() for transaction in transactions]
-    return jsonify(serialized_transactions), 200
+    # Obtener las transferencias enviadas y recibidas por el usuario
+    sent_transfers = Transfer.query.filter_by(sender_id=user.id).all()
+    received_transfers = Transfer.query.filter_by(receiver_iban=user.iban).all()
+
+    # Serializar las transferencias en formato JSON
+    sent_transfers_serialized = [transfer.serialize() for transfer in sent_transfers]
+    received_transfers_serialized = [transfer.serialize() for transfer in received_transfers]
+
+    # Devolver las transferencias enviadas y recibidas como respuesta
+    return jsonify({
+        "sent_transfers": sent_transfers_serialized,
+        "received_transfers": received_transfers_serialized
+    }), 200

@@ -3,11 +3,7 @@ import { Context } from "../store/appContext";
 
 const CustomerInfo = () => {
   const { store, actions } = useContext(Context);
-
-  // useEffect(() => {
-  //   actions.getUserProfile();
-  // }, []);
-
+  console.log(store.user)
   return (
     <div className="col-6">
       <div
@@ -22,10 +18,10 @@ const CustomerInfo = () => {
       >
         <h2 style={{ marginBottom: "10px" }}>Customer Information</h2>
             <p>
-              <strong>Full Name:</strong> {store.user.full_name}
+              <strong>Full Name:</strong> {store.user?.full_name}
             </p>
             <p>
-              <strong>IBAN:</strong> {store.user.iban}
+              <strong>IBAN:</strong> {store.user?.iban}
             </p>
       </div>
     </div>
