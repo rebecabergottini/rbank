@@ -5,6 +5,7 @@ const getState = ({ setStore }) => {
     store: {
       message: null,
       user: {}, // Estado inicial del usuario
+      transfers: []
       },
     actions: {
       // Use getActions to call a function within a function
@@ -56,7 +57,8 @@ a
               password: password,
             }
           );
-          localStorage.setItem("token", response.data.access_token); // Almacenar el token en el localStorage
+          console.log(response)
+          localStorage.setItem("token", response.data.token); // Almacenar el token en el localStorage
           localStorage.setItem("auth", true); // Establecer el estado de autenticación a true
           setStore({
             auth: true,
@@ -76,31 +78,46 @@ a
           auth: false, // Establecer el estado de autenticación a false
         }); // Actualizar el estado
       },
-
-      // // Funcion para hacer la transferencia
-      // transfer: async (iban, amount) => {
-      //   try {
-      //     const token = localStorage.getItem("token"); // Obtener el token de autenticación del localStorage
-      
-      //     await axios.post(
-      //       "https://rebecabergottini-jubilant-engine-v4v97v96677hxvww-3001.preview.app.github.dev/api/transfers",
-      //       {
-      //         receiver_iban: iban,
-      //         amount: amount
-      //       },
-      //       {
-      //         headers: {
-      //           "Authorization": "Bearer " + token
-      //         }
-      //       }
-      //     );      
-      //     return true;
-      //   } catch (error) {
-      //     alert(error);
-      //   }
-      // }      
-    },
+      getTransfers: async () =>{
+        const opt = {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+          },
+        }
+        try {
+          const resp = await fetch("https://rebecabergottini-jubilant-engine-v4v97v96677hxvww-3001.preview.app.github.dev/api/transfers",opt)
+          const data = await resp.json()
+          setStore({transfers: data})
+        } catch (error) {
+          console.log(error)
+        }
+      },
+      // Funcion para hacer la transferencia
+      transfers: async (iban, amount) => {
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer " + localStorage.getItem("token"))
+        
+        const raw = JSON.stringify({
+          "receiver_iban": iban,
+          "amount": amount
+        });
+        
+        const requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+        };
+        
+        fetch("https://rebecabergottini-jubilant-engine-v4v97v96677hxvww-3001.preview.app.github.dev/api/transfers", requestOptions)
+          .then(response => response.text())
+          .then(result => console.log(result))
+          .catch(error => console.log('error', error));
+        }
+      }
+    }
   };
-};
 
 export default getState;

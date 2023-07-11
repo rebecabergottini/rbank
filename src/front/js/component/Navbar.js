@@ -1,5 +1,6 @@
 import { useState } from "react";
 import React from "react";
+import logo from "../../img/logo.png"
 
 const Navbar = () => {
   const [active, setActive] = useState("Home");
@@ -9,7 +10,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
-          {/* <img src="src/front/assets/logo.svg" alt="hoobank" className="logo" /> */}
+          <img src={logo} alt="hoobank" className="logo"  style={{ width: "200px" }} />
         </a>
         <button
           className="navbar-toggler"
@@ -35,57 +36,6 @@ const Navbar = () => {
                 }}
               >
                 Home
-              </a>
-            </li>
-            <li
-              className={`nav-item ${active === "Features" ? "active" : ""}`}
-              onClick={() => setActive("Features")}
-            >
-              <a
-                className="nav-link"
-                href="#"
-                style={{
-                  color: "#FFF",
-                  fontSize: "16px",
-                  fontFamily: "Poppins",
-                  lineHeight: "130%",
-                }}
-              >
-                Features
-              </a>
-            </li>
-            <li
-              className={`nav-item ${active === "Products" ? "active" : ""}`}
-              onClick={() => setActive("Products")}
-            >
-              <a
-                className="nav-link"
-                href="#"
-                style={{
-                  color: "#FFF",
-                  fontSize: "16px",
-                  fontFamily: "Poppins",
-                  lineHeight: "130%",
-                }}
-              >
-                Products
-              </a>
-            </li>
-            <li
-              className={`nav-item ${active === "Clients" ? "active" : ""}`}
-              onClick={() => setActive("Clients")}
-            >
-              <a
-                className="nav-link"
-                href="#"
-                style={{
-                  color: "#FFF",
-                  fontSize: "16px",
-                  fontFamily: "Poppins",
-                  lineHeight: "130%",
-                }}
-              >
-                Clients
               </a>
             </li>
             <li className="nav-item">

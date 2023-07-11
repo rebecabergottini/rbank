@@ -3,7 +3,8 @@ import { Context } from "../store/appContext";
 
 const CustomerInfo = () => {
   const { store, actions } = useContext(Context);
-  console.log(store.user)
+  console.log(store.user);
+
   return (
     <div className="col-6">
       <div
@@ -12,17 +13,26 @@ const CustomerInfo = () => {
           backgroundColor: "#FFF",
           padding: "20px",
           borderRadius: "8px",
-          boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",
-          color: "#000",
+          background: "linear-gradient(to right, #00f6ff, #0f507b69)",
+          color: "#ffff",
+          height: "218px",
+          width: "417px",
+          display: "flex",
+          flexDirection: "column",
+          position: "absolute",
+          top: "20%",
         }}
       >
-        <h2 style={{ marginBottom: "10px" }}>Customer Information</h2>
-            <p>
-              <strong>Full Name:</strong> {store.user?.full_name}
+        <div>
+          <h2 style={{ marginBottom: "10px", color: "#ffffff" }}>Debit</h2>
+           <p>
+              <strong></strong> {store.user?.iban}
             </p>
-            <p>
-              <strong>IBAN:</strong> {store.user?.iban}
-            </p>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+            <strong style={{ fontSize: "23px",  marginBottom: "-81px" }}>{store.user?.full_name}</strong>
+            <p className="date" style={{ fontSize: "16px", marginBottom:"-77px" }}>03/29</p>
+          </div>
+        </div>
       </div>
     </div>
   );

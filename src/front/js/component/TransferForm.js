@@ -4,8 +4,7 @@ import { Context } from "../store/appContext.js";
 const TransferForm = () => {
   const [iban, setIban] = useState("");
   const [amount, setAmount] = useState("");
-  const { actions } = useContext(Context)
-
+  const { actions } = useContext(Context);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,23 +14,22 @@ const TransferForm = () => {
       return;
     }
     // Llamar a la función transfer de la tienda Flux
-    const success = await actions.transfer(iban, amount);
-  
+    const success = await actions.transfers(iban, amount);
+
     if (success) {
       // Realizar acciones adicionales en caso de éxito, como mostrar un mensaje o actualizar la lista de transferencias realizadas
       console.log("Transfer successful");
     } else {
       // Realizar acciones adicionales en caso de error, como mostrar un mensaje de error
       console.log("Transfer failed");
-    }  
+    }
     // Restablecer los campos del formulario
     setIban("");
     setAmount("");
   };
-  
 
   return (
-    <div className="transferform-container">
+    <div className="bg-dark d-flex justify-content-center align-items-center transferform-container">
       <div className="transfer-form">
         <h2 className="form-title">Transfer Money</h2>
         <form onSubmit={handleSubmit}>

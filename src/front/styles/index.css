@@ -27,7 +27,6 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
 }
 
 .bg-blue-gradient {
@@ -137,6 +136,11 @@
 
 body {
   background-color: #00040f;
+}
+
+.bg-dark {
+  --bs-bg-opacity: 1;
+  background-color: rgba(52, 58, 64, var(--bs-bg-opacity)) !important;
 }
 
 /* Hero */
@@ -746,101 +750,6 @@ body {
   .cardDeal-left_content button {
     font-size: 14px;
   }
-}
-/* DASHBOARD */
-
-/* Estilos para el componente Section */
-.section-dashboard {
-  margin-left: 5vw;
-  margin-right: 14px;
-  padding: 2rem;
-  height: 60rem;
-  background-color: #f5f5fd;
-}
-
-/* Estilos para la clase grid */
-.grid {
-  margin-top: 0.5rem;
-  z-index: 2;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-/* Estilos para el componente Nav */
-nav {
-  display: flex;
-  justify-content: space-between;
-  color: black;
-}
-
-/* Estilos para la clase title */
-.title h5 {
-  color: grey;
-}
-
-/* Estilos para la clase search */
-.search {
-  background-color: white;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 8rem 1rem 1rem;
-  border-radius: 1.5rem;
-}
-
-/* Estilos para los elementos SVG dentro de la clase search */
-.search svg {
-  color: grey;
-}
-
-/* Estilos para el elemento input dentro de la clase search */
-.search input {
-  background-color: transparent;
-  border: none;
-  color: grey;
-}
-
-/* Estilos para el elemento input en estado de enfoque */
-.search input:focus {
-  outline: none;
-}
-
-/* Estilos para el marcador de posición del elemento input */
-.search input::placeholder {
-  color: grey;
-}
-
-.sales {
-  color: black;
-  width: 100%;
-}
-
-.sales__details {
-  display: flex;
-  justify-content: space-between;
-  margin: 1rem 0;
-}
-
-.sales__details div {
-  display: flex;
-  gap: 1rem;
-}
-
-.sales__details h5 {
-  color: gray;
-}
-
-.sales__graph {
-  height: 10rem;
-  width: 100%;
-}
-
-.recharts-default-tooltip {
-  background-color: black !important;
-  border-color: black !important;
-  color: white !important;
 }
 
 /*estilos de history */
@@ -1660,7 +1569,7 @@ nav {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 90%;
-  max-width: 500px;
+  max-width: 400px;
   margin: auto;
   height: auto;
 }
@@ -1710,7 +1619,6 @@ textarea.form-control {
 /* customerinfo */
 
 .customer-info {
-  background-color: #2c135f;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
@@ -1722,9 +1630,9 @@ textarea.form-control {
 }
 
 .customer-info strong {
-  color: #ffd700;
+  color: #ffffff;
 }
 
 .customer-info p {
-  margin-bottom: 5px;
+  margin-bottom: -14px;
 }

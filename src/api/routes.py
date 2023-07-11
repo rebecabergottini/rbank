@@ -96,7 +96,8 @@ def create_transfer():
     # Buscar al remitente y destinatario en la base de datos
     sender = User.query.filter_by(email=current_user_email).first()
     receiver = User.query.filter_by(iban=receiver_iban).first()
-
+    print("sender",sender)
+    print("receiver",receiver)
     # Verificar si el destinatario es válido
     if receiver is None:
         return jsonify({"message": "IBAN de destinatario inválido"}), 404
@@ -106,22 +107,22 @@ def create_transfer():
         return jsonify({"message": "No se puede transferir a la propia cuenta"}), 400
 
     # Verificar si el monto de la transferencia es válido
-    if amount <= 0:
+    if int(amount) <= 0:
         return jsonify({"message": "Monto inválido"}), 400
 
     # Verificar si el remitente tiene suficiente saldo
     if sender.balance is None:
         sender.balance = 0.0
 
-    if sender.balance < amount:
+    if sender.balance < int(amount):
         return jsonify({"message": "Saldo insuficiente"}), 400
 
     # Realizar la transferencia
-    sender.balance -= amount
-    receiver.balance += amount
+    sender.balance -= int(amount)
+    receiver.balance += int(amount)
 
     # Crear una nueva instancia de Transfer (Transferencia)
-    transfer = Transfer(sender_id=sender.id, receiver_id=receiver.id, receiver_iban=receiver_iban, amount=amount)
+    transfer = Transfer(sender_id=sender.id, receiver_id=receiver.id, receiver_iban=receiver_iban, amount=int(amount))
 
     # Guardar la transferencia en la base de datos
     db.session.add(transfer)

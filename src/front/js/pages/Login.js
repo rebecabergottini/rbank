@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router";
 
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,12 +19,9 @@ export default function Login() {
   }
 
   return (
-    <div className="container-fluid h-screen d-flex align-items-center justify-content-center">
-      <div className="col-sm-6 bg-gray-800">
-        <form
-          onSubmit={handleSubmit}
-          className="max-w-md w-100 p-4 rounded-lg bg-gray-900"
-        >
+    <div className="bg-dark container-fluid d-flex align-items-center justify-content-center" style={{ height: "100vh" }}>
+      <div className="col-12 col-sm-8 col-md-6 col-lg-4">
+        <form onSubmit={handleSubmit} className="p-4 rounded-lg bg-gray-900">
           <h2 className="text-4xl text-white font-bold text-center mb-4">
             Log in
           </h2>
@@ -62,7 +60,6 @@ export default function Login() {
                 Remember Me
               </label>
             </div>
-            <a href="#">Forgot Password</a>
           </div>
           <button type="submit" className="btn btn-primary w-100 mt-4">
             Log in

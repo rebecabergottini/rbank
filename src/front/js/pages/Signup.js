@@ -1,39 +1,40 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [full_name, setFullName] = useState("");
   const [dni, setDni] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [checkConditions, setCheckConditions] = useState(false)
+  const [checkConditions, setCheckConditions] = useState(false);
 
-  const { actions } = useContext(Context)
+  const { actions } = useContext(Context);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (checkConditions && full_name && dni && email && password) {
-      let isLogged = await actions.createUser(full_name, email,dni, password);
+      let isLogged = await actions.createUser(
+        full_name,
+        email,
+        dni,
+        password
+      );
       if (isLogged) {
         setFullName("");
         setDni("");
         setEmail("");
         setPassword("");
-        navigate("/");
+        navigate("/dashboard");
       }
     }
   };
 
-
   return (
-    <div className="container-fluid h-screen d-flex align-items-center justify-content-center">
-      <div className="col-sm-6 bg-gray-800">
-        <form
-          onSubmit={handleSubmit}
-          className="max-w-md w-100 p-4 rounded-lg bg-gray-900"
-        >
+    <div className="bg-dark container-fluid d-flex align-items-center justify-content-center">
+      <div className="col-12 col-sm-8 col-md-6 col-lg-4">
+        <form onSubmit={handleSubmit} className="p-4 rounded-lg bg-gray-900">
           <h2 className="text-4xl text-white font-bold text-center mb-4">
             Sign Up
           </h2>
@@ -89,14 +90,18 @@ const Signup = () => {
               required
             />
           </div>
-          <div className="m-3 form-check ">
-          <input type="checkbox" className="form-check-input" id="checkConditions" onChange={e => setCheckConditions(e.target.checked)} />
-                      <label className="form-check-label" htmlFor="checkConditions">I agree to the terms of service.</label>
-                    </div>
-
-          <button  
-          type="submit"
-          className="btn btn-primary w-100 mt-4">
+          <div className="form-check mb-3">
+            <input
+              type="checkbox"
+              className="form-check-input"
+              id="checkConditions"
+              onChange={(e) => setCheckConditions(e.target.checked)}
+            />
+            <label className="form-check-label text-white" htmlFor="checkConditions">
+              I agree to the terms of service.
+            </label>
+          </div>
+          <button type="submit" className="btn btn-primary w-100 mt-4">
             Register
           </button>
         </form>

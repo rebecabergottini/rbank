@@ -1,13 +1,10 @@
 import React from "react";
+import robot from "../../img/robot.png"
 
 const Hero = () => {
   return (
     <div className="home" id="home">
       <div className="home-content">
-        <div className="home-content-discount_stript bg-discount-gradient">
-          <img src="" alt="discount png" />
-          <p>20% Discount for 1 Month Account</p>
-        </div>
         <div className="home-content-heading">
           <h1>
             Open a Welcome Account
@@ -25,7 +22,7 @@ const Hero = () => {
         </div>
       </div>
       <div className="home-image">
-        <img src="" alt="robot Image" />
+        <img src={robot} alt="robot Image" />
         <div className="gradient-start pink__gradient" />
         <div className="gradient-mid white__gradient" />
         <div className="gradient-end blue__gradient" />

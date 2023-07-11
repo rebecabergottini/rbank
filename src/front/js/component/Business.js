@@ -1,6 +1,9 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 import Container from "./Container.js";
+import send from "../../img/send.png"
+import start from "../../img/start.png"
+import balance from "../../img/balance.png"
+
 
 const Business = () => {
   return (
@@ -15,7 +18,6 @@ const Business = () => {
       <div className="business-right_content">
         <div className="righ-content">
           <div className="right-content-image">
-            <img src="" alt="start" />
           </div>
           <div className="right-content-text">
             <h4>Rewards</h4>
@@ -28,7 +30,6 @@ const Business = () => {
 
         <div className="righ-content">
           <div className="right-content-image">
-            <img src="" alt="shield" />
           </div>
           <div className="right-content-text">
             <h4>100% Secured</h4>
@@ -41,7 +42,6 @@ const Business = () => {
 
         <div className="righ-content">
           <div className="right-content-image">
-            <img src="" alt="arrow" />
           </div>
           <div className="right-content-text">
             <h4>Balance Transfer</h4>
