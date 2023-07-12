@@ -7,10 +7,8 @@ const Hero = () => {
       <div className="home-content">
         <div className="home-content-heading">
           <h1>
-            Open a Welcome Account
-            <br />
-            and move your{" "}
-            <span className="text-gradient">business forward</span> <br />
+            The first online bank you
+            <span className="text-gradient"> will fall in love with</span>
           </h1>
         </div>
         <div className="home-content-paragraph">

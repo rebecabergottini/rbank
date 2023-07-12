@@ -30,15 +30,16 @@ a
       // Función para crear un nuevo usuario
       createUser: async (full_name, email, dni, password) => {
         try {    
-        let response = await axios.post("https://rebecabergottini-jubilant-engine-v4v97v96677hxvww-3001.preview.app.github.dev/api/signup", {
+        let response = await axios.post("https://rebecabergottini-automatic-space-66gq7gqgj5924gxw-3001.preview.app.github.dev/api/signup", {
             full_name: full_name,
             email: email,
             dni: dni,
             password: password
         })
-          localStorage.setItem("token", response.data.access_token); // Almacenar el token en el localStorage
+          localStorage.setItem("token", response.data.token); // Almacenar el token en el localStorage
           localStorage.setItem("auth", true); // Establecer el estado de autenticación a true
           setStore({
+            user:response.data.user,
             auth: true,
           }); // Actualizar el estado
           return true;
@@ -51,7 +52,7 @@ a
       login: async (email, password) => {
         try {
           let response = await axios.post(
-            "https://rebecabergottini-jubilant-engine-v4v97v96677hxvww-3001.preview.app.github.dev/api/login",
+            "https://rebecabergottini-automatic-space-66gq7gqgj5924gxw-3001.preview.app.github.dev/api/login",
             {
               email: email,
               password: password,
@@ -86,7 +87,7 @@ a
           },
         }
         try {
-          const resp = await fetch("https://rebecabergottini-jubilant-engine-v4v97v96677hxvww-3001.preview.app.github.dev/api/transfers",opt)
+          const resp = await fetch("https://rebecabergottini-automatic-space-66gq7gqgj5924gxw-3001.preview.app.github.dev/api/transfers",opt)
           const data = await resp.json()
           setStore({transfers: data})
         } catch (error) {
@@ -111,7 +112,7 @@ a
           redirect: 'follow'
         };
         
-        fetch("https://rebecabergottini-jubilant-engine-v4v97v96677hxvww-3001.preview.app.github.dev/api/transfers", requestOptions)
+        fetch("https://rebecabergottini-automatic-space-66gq7gqgj5924gxw-3001.preview.app.github.dev/api/transfers", requestOptions)
           .then(response => response.text())
           .then(result => console.log(result))
           .catch(error => console.log('error', error));

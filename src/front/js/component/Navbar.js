@@ -10,7 +10,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
-          <img src={logo} alt="hoobank" className="logo"  style={{ width: "200px" }} />
+          <img src={logo} alt="hoobank" className="logo"  style={{ width: "220px" }} />
         </a>
         <button
           className="navbar-toggler"

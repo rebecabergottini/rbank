@@ -67,75 +67,11 @@
   );
 }
 
-.bg-discount-gradient {
-  background: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
-}
-
-.box-shadow {
-  box-shadow: 0px 20px 100px -10px rgba(66, 71, 91, 0.1);
-}
-
-.sidebar {
-  -webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-
-@-webkit-keyframes slide-top {
-  0% {
-    -webkit-transform: translateY(100px);
-    transform: translateY(100px);
-  }
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
-}
-
-@keyframes slide-top {
-  0% {
-    -webkit-transform: translateY(100px);
-    transform: translateY(100px);
-  }
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
-}
-
-.feature-card:hover {
-  background: var(--black-gradient);
-  box-shadow: var(--card-shadow);
-}
-
-.feedback-container .feedback-card:last-child {
-  margin-right: 0px;
-}
-
-.feedback-card {
-  background: transparent;
-}
-
-.feedback-card:hover {
-  background: var(--black-gradient);
-}
-
-.blue__gradient {
-  background: linear-gradient(180deg, rgba(188, 165, 255, 0) 0%, #214d76 100%);
-  filter: blur(123px);
-}
-
-.pink__gradient {
-  background: linear-gradient(90deg, #f4c4f3 0%, #fc67fa 100%);
-  filter: blur(900px);
-}
-
-.white__gradient {
-  background: rgba(255, 255, 255, 0.6);
-  filter: blur(750px);
-}
-
 body {
-  background-color: #00040f;
+  --bs-bg-opacity: 1;
+  background-color: rgba(52, 58, 64, var(--bs-bg-opacity)) !important;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
 
 .bg-dark {
@@ -162,27 +98,6 @@ body {
   text-align: start;
 }
 
-.home-content-discount_stript {
-  display: flex;
-  flex-direction: row;
-  padding: 0.5rem 1rem;
-  /* justify-content: start; */
-  border-radius: 10px;
-  /* max-width: 390px; */
-  align-items: center;
-  /* margin: 0; */
-  align-self: self-start;
-}
-
-.home-content-discount_stript p {
-  letter-spacing: 1.5px;
-  display: flex;
-  align-items: center;
-  font-size: 17px;
-  font-family: var(--font-head2);
-  margin-left: 9px;
-}
-
 .home-content-heading {
   display: flex;
   width: 100%;
@@ -192,7 +107,6 @@ body {
 .home-content-heading h1 {
   font-size: 67px;
   font-weight: 800;
-  font-family: var(--font-head1);
   line-height: 85px;
 }
 
@@ -216,14 +130,15 @@ body {
   justify-content: flex-end;
   align-items: flex-end;
   position: relative;
-  /* right: 0; */
+  right: 0;
 }
+
 .home-image img {
   position: relative;
   width: 100%;
   height: 100%;
-  /* display:flex; */
-  z-index: 5;
+  display:flex;
+  z-index: 1;
 }
 
 .gradient-start {
@@ -271,42 +186,7 @@ body {
 
   .home-content-paragraph {
     font-size: 19px;
-    line-height: 25px;
-    /* max-width: 490px; */
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .home {
-    padding: 2rem 0 2rem 2rem;
-  }
-  .home-content {
-    padding-right: 32px;
-  }
-
-  .home-content-discount_stript {
-    align-self: center;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .home-content-discount_stript p {
-    letter-spacing: 1px;
-    align-items: center;
-    font-size: 14px;
-    margin-left: 7px;
-  }
-
-  .home-content-heading h1 {
-    font-size: 50px;
-    font-weight: 800;
-    line-height: 67px;
-  }
-
-  .home-content-paragraph {
-    font-size: 16px;
-    line-height: 22px;
-    /* max-width: 330px; */
+    line-height: 25px;  
   }
 }
 
@@ -483,7 +363,7 @@ body {
   justify-content: center;
   align-items: center;
   margin-right: 1vw;
-  background-color: #033f6746;
+  background-color: #75edfd;
   padding: 12px;
   border-radius: 100%;
 }
@@ -1191,6 +1071,13 @@ body {
 
 /* footer */
 
+.centered-content {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
 .footer {
   display: flex;
   flex-direction: column;
@@ -1486,6 +1373,7 @@ body {
   );
 }
 
+
 .quote-head p {
   font-size: 21px;
   font-family: var(--font-para);
@@ -1635,4 +1523,21 @@ textarea.form-control {
 
 .customer-info p {
   margin-bottom: -14px;
+}
+
+/* boton logout */
+.custom-logout-button {
+  padding: 6px 16px;
+  margin-left: 15px;
+  border-radius: 10px;
+  background: linear-gradient(to right, #8CFBFF, #0FA0FF);
+  color: #FFF;
+  font-size: 16px;
+  line-height: 130%;
+  width: 87px;
+  height: 33px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

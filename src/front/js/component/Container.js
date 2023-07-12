@@ -9,6 +9,8 @@ export default function Container(props) {
       <Link to="/signup" className="btn bg-blue-gradient">
         Get Started
       </Link>
+      <br/>
+          <br/>
     </div>
   );
 }

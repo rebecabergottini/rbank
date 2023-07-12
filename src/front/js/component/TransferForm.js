@@ -1,10 +1,13 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
+import { useNavigate } from "react-router-dom";
 
 const TransferForm = () => {
   const [iban, setIban] = useState("");
   const [amount, setAmount] = useState("");
   const { actions } = useContext(Context);
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +29,7 @@ const TransferForm = () => {
     // Restablecer los campos del formulario
     setIban("");
     setAmount("");
+    navigate("/dashboard");
   };
 
   return (
