@@ -21,7 +21,6 @@ const getState = ({ setStore }) => {
           if (i === index) elm.background = color;
           return elm;
         });
-a
         // Reset the global store
         setStore({ demo: demo });
       },
